@@ -1,7 +1,13 @@
 import streamlit as st
 import pandas as pd
 
-df = pd.read_excel('data_untuk_visualisasi.xlsx', sheet_name = 'ALL')
+# Membaca data dari file Excel
+df = pd.read_excel('data_untuk_visualisasi.xlsx', sheet_name='ALL')
+
+# Menghapus baris yang memiliki NaN pada kolom 'Nama Item Garda Medika' terlebih dahulu
+df = df.dropna(subset=['Nama Item Garda Medika'])
+
+# Mengkonversi 'Amount Bill' menjadi numerik dan menggantikan yang tidak bisa dikonversi menjadi NaN
 df['Amount Bill'] = pd.to_numeric(df['Amount Bill'], errors='coerce')
 
 # Streamlit App Title
