@@ -17,7 +17,7 @@ df['Amount Bill'] = df['Amount Bill'].fillna(0)
 df['Amount Bill'] = df['Amount Bill'].astype(float)
 
 # Streamlit App Title
-st.title("Data Filtering and Grouping App")
+st.title("Data Obat di Tiap Rumah Sakit")
 
 # Sidebar Navigation
 page = st.sidebar.selectbox("Choose Page:", ["Filter Data", "Grouped Data"])
