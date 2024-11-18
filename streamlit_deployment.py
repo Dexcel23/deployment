@@ -22,6 +22,8 @@ st.title("Data Obat di Tiap Rumah Sakit")
 # Sidebar Navigation
 page = st.sidebar.selectbox("Choose Page:", ["Filter Data", "Grouped Data"])
 
+small_note = "Dibuat oleh Dexcel Oswald Otniel"
+
 # Page 1: Filter Data
 if page == "Filter Data":
     st.header("Filter Data Table by Treatment Place")
@@ -47,7 +49,8 @@ if page == "Filter Data":
 
     # Display Total Records
     st.text(f"Total Records: {len(filtered_df)}")
-
+    st.markdown(small_note)
+    
 # Page 2: Grouped Data
 elif page == "Grouped Data":
     st.header("Grouped Data Table")
@@ -81,3 +84,4 @@ elif page == "Grouped Data":
     formatted_total_amount_bill = f"Rp {total_amount_bill:,.0f}".replace(",", ".")
 
     st.subheader(f"Total Amount Bill for all grouped data: {formatted_total_amount_bill}")
+    st.markdown(small_note)
