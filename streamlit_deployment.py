@@ -47,28 +47,3 @@ if page == "Filter Data":
 
     # Display Total Records
     st.text(f"Total Records: {len(filtered_df)}")
-
-# Page 2: Grouped Data
-elif page == "Grouped Data":
-    st.header("Grouped Data Table")
-
-    # Filter by Treatment Place
-    selected_treatment_place = st.sidebar.selectbox(
-        "Filter by Treatment Place:",
-        options=["All"] + df['TreatmentPlace'].unique().tolist()
-    )
-
-    # Apply Filter for Grouping
-    if selected_treatment_place != "All":
-        filtered_group_df = df[df['TreatmentPlace'] == selected_treatment_place]
-    else:
-        filtered_group_df = df
-
-    # Group by 'Nama Item Garda Medika'
-    grouped_df = filtered_group_df.groupby('Nama Item Garda Medika').agg(
-        Total_Rows=('ClaimNo', 'count')
-    ).reset_index()
-
-    # Display Grouped Data
-    st.subheader(f"Grouped Data by 'Nama Item Garda Medika' (Filtered by {selected_treatment_place})")
-    st.write(grouped_df)
