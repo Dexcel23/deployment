@@ -8,14 +8,16 @@ st.title("Filter Data Table by Treatment Place")
 
 # Sidebar for Filtering
 st.sidebar.header("Filter Options")
-treatment_places = st.sidebar.multiselect(
-    "Select Treatment Places:",
-    options=df['TreatmentPlace'].unique(),
-    default=df['TreatmentPlace'].unique()
+selected_treatment_place = st.sidebar.selectbox(
+    "Select Treatment Place:",
+    options=["All"] + df['TreatmentPlace'].unique().tolist()
 )
 
-# Filter Data
-filtered_df = df[df['TreatmentPlace'].isin(treatment_places)]
+# Apply Filter
+if selected_treatment_place != "All":
+    filtered_df = df[df['TreatmentPlace'] == selected_treatment_place]
+else:
+    filtered_df = df
 
 # Display Filtered Data
 st.subheader("Filtered Data Table")
