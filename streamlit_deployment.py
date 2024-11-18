@@ -4,24 +4,56 @@ import pandas as pd
 df = pd.read_excel('data_untuk_visualisasi.xlsx', sheet_name = 'ALL')
 
 # Streamlit App Title
-st.title("Filter Data Table by Treatment Place")
+st.title("Data Filtering and Grouping App")
 
-# Sidebar for Filtering
-st.sidebar.header("Filter Options")
-selected_treatment_place = st.sidebar.selectbox(
-    "Select Treatment Place:",
-    options=["All"] + df['TreatmentPlace'].unique().tolist()
-)
+# Sidebar Navigation
+page = st.sidebar.selectbox("Choose Page:", ["Filter Data", "Grouped Data"])
 
-# Apply Filter
-if selected_treatment_place != "All":
-    filtered_df = df[df['TreatmentPlace'] == selected_treatment_place]
-else:
-    filtered_df = df
+# Page 1: Filter Data
+if page == "Filter Data":
+    st.header("Filter Data Table by Treatment Place")
 
-# Display Filtered Data
-st.subheader("Filtered Data Table")
-st.write(filtered_df)
+    # Sidebar for Filtering
+    selected_treatment_place = st.sidebar.selectbox(
+        "Select Treatment Place:",
+        options=["All"] + df['TreatmentPlace'].unique().tolist()
+    )
 
-# Display Total Records
-st.text(f"Total Records: {len(filtered_df)}")
+    # Apply Filter
+    if selected_treatment_place != "All":
+        filtered_df = df[df['TreatmentPlace'] == selected_treatment_place]
+    else:
+        filtered_df = df
+
+    # Display Filtered Data
+    st.subheader("Filtered Data Table")
+    st.write(filtered_df)
+
+    # Display Total Records
+    st.text(f"Total Records: {len(filtered_df)}")
+
+# Page 2: Grouped Data
+elif page == "Grouped Data":
+    st.header("Grouped Data Table")
+
+    # Filter by Treatment Place
+    selected_treatment_place = st.sidebar.selectbox(
+        "Filter by Treatment Place:",
+        options=["All"] + df['TreatmentPlace'].unique().tolist()
+    )
+
+    # Apply Filter for Grouping
+    if selected_treatment_place != "All":
+        filtered_group_df = df[df['TreatmentPlace'] == selected_treatment_place]
+    else:
+        filtered_group_df = df
+
+    # Group by 'Nama Item Garda Medika'
+    grouped_df = filtered_group_df.groupby('Nama Item Garda Medika').agg(
+        Total_Amount_Bill=('Amount Bill', 'sum'),
+        Total_Rows=('ClaimNo', 'count')
+    ).reset_index()
+
+    # Display Grouped Data
+    st.subheader(f"Grouped Data by 'Nama Item Garda Medika' (Filtered by {selected_treatment_place})")
+    st.write(grouped_df)
