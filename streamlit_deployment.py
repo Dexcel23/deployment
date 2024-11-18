@@ -9,9 +9,11 @@ df = df.dropna(subset=['Nama Item Garda Medika'])
 
 # Menghapus baris yang memiliki NaN pada kolom 'Nama Item Garda Medika'
 df = df.dropna(subset=['Amount Bill'])
+df = df.dropna(subset=['Qty'])
 
 # Mengkonversi 'Amount Bill' menjadi numerik dan menggantikan yang tidak bisa dikonversi menjadi NaN
 df['Amount Bill'] = pd.to_numeric(df['Amount Bill'], errors='coerce')
+df['Amount Bill'] = pd.to_numeric(df['Qty'], errors='coerce')
 
 # Streamlit App Title
 st.title("Data Filtering and Grouping App")
@@ -61,7 +63,7 @@ elif page == "Grouped Data":
     # Group by 'Nama Item Garda Medika'
     grouped_df = filtered_group_df.groupby('Nama Item Garda Medika').agg(
         Total_Amount_Bill=('Amount Bill', 'sum'),
-        Total_Rows=('ClaimNo', 'count')
+        Total_Rows=('Qty', 'count')
     ).reset_index()
 
     # Display Grouped Data
