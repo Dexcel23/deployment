@@ -32,11 +32,14 @@ if page == "Filter Data":
         options=["All"] + df['TreatmentPlace'].unique().tolist()
     )
 
-    # Apply Filter
+   # Apply Filter
     if selected_treatment_place != "All":
         filtered_df = df[df['TreatmentPlace'] == selected_treatment_place]
     else:
         filtered_df = df
+
+    # Pilih hanya kolom yang diinginkan
+    filtered_df = filtered_df[['Nama Item Garda Medika', 'Satuan', 'Qty', 'Amount Bill']]
 
     # Display Filtered Data
     st.subheader("Filtered Data Table")
