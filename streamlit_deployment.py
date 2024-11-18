@@ -76,4 +76,8 @@ elif page == "Grouped Data":
     
     # Calculate and Display the Total 'Amount Bill' for all grouped data
     total_amount_bill = grouped_df['Total_Amount_Bill'].sum()
-    st.subheader(f"Total Bill Rumah Sakit: {total_amount_bill}")
+
+    # Format total amount bill in Rupiah format
+    formatted_total_amount_bill = f"Rp {total_amount_bill:,.0f}".replace(",", ".")
+
+    st.subheader(f"Total Amount Bill for all grouped data: {formatted_total_amount_bill}")
