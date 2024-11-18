@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 
 df = pd.read_excel('data_untuk_visualisasi.xlsx', sheet_name = 'ALL')
+df['Amount Bill'] = pd.to_numeric(df['Amount Bill'], errors='coerce')
 
 # Streamlit App Title
 st.title("Data Filtering and Grouping App")
