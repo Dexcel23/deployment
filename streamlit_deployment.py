@@ -73,3 +73,7 @@ elif page == "Grouped Data":
     # Display Grouped Data
     st.subheader(f"Grouped Data by 'Nama Item Garda Medika' (Filtered by {selected_treatment_place})")
     st.write(grouped_df)
+    
+    # Calculate and Display the Total 'Amount Bill' for all grouped data
+    total_amount_bill = grouped_df['Total_Amount_Bill'].sum()
+    st.subheader(f"Total Bill Rumah Sakit: {total_amount_bill}")
