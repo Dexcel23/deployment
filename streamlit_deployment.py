@@ -4,16 +4,17 @@ import pandas as pd
 # Membaca data dari file Excel
 df = pd.read_excel('data_untuk_visualisasi.xlsx', sheet_name='ALL')
 
-# Menghapus baris yang memiliki NaN pada kolom 'Nama Item Garda Medika' terlebih dahulu
-df = df.dropna(subset=['Nama Item Garda Medika'])
-
 # Menghapus baris yang memiliki NaN pada kolom 'Nama Item Garda Medika'
-df = df.dropna(subset=['Amount Bill'])
-df = df.dropna(subset=['Qty'])
+df = df.dropna(subset=['Nama Item Garda Medika'])
 
 # Mengkonversi 'Amount Bill' menjadi numerik dan menggantikan yang tidak bisa dikonversi menjadi NaN
 df['Amount Bill'] = pd.to_numeric(df['Amount Bill'], errors='coerce')
-df['Amount Bill'] = pd.to_numeric(df['Qty'], errors='coerce')
+
+# Mengisi NaN yang mungkin ada pada 'Amount Bill' dengan 0 (atau bisa diganti dengan nilai lain)
+df['Amount Bill'] = df['Amount Bill'].fillna(0)
+
+# Pastikan kolom 'Amount Bill' memiliki tipe data numerik (float)
+df['Amount Bill'] = df['Amount Bill'].astype(float)
 
 # Streamlit App Title
 st.title("Data Filtering and Grouping App")
@@ -63,7 +64,7 @@ elif page == "Grouped Data":
     # Group by 'Nama Item Garda Medika'
     grouped_df = filtered_group_df.groupby('Nama Item Garda Medika').agg(
         Total_Amount_Bill=('Amount Bill', 'sum'),
-        Total_Rows=('Qty', 'count')
+        Total_Rows=('ClaimNo', 'count')
     ).reset_index()
 
     # Display Grouped Data
