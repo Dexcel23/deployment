@@ -10,6 +10,9 @@ df = df.dropna(subset=['Nama Item Garda Medika'])
 # Mengkonversi 'Amount Bill' menjadi numerik dan menggantikan yang tidak bisa dikonversi menjadi NaN
 df['Amount Bill'] = pd.to_numeric(df['Amount Bill'], errors='coerce')
 
+# Menghapus baris yang memiliki NaN pada kolom 'Nama Item Garda Medika'
+df = df.dropna(subset=['Amount Bill'])
+
 # Streamlit App Title
 st.title("Data Filtering and Grouping App")
 
