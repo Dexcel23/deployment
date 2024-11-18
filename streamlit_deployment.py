@@ -63,7 +63,6 @@ elif page == "Grouped Data":
 
     # Group by 'Nama Item Garda Medika'
     grouped_df = filtered_group_df.groupby('Nama Item Garda Medika').agg(
-        Total_Amount_Bill=('Amount Bill', 'sum'),
         Total_Rows=('ClaimNo', 'count')
     ).reset_index()
 
