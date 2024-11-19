@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+from wordlcould import WordCloud
+import matplotlib.pyplot as plt
 
 # Membaca data dari file Excel
 df = pd.read_excel('data_untuk_visualisasi.xlsx', sheet_name='ALL')
@@ -84,4 +86,39 @@ elif page == "Grouped Data":
     formatted_total_amount_bill = f"Rp {total_amount_bill:,.0f}".replace(",", ".")
 
     st.subheader(f"Total Amount Bill for all grouped data: {formatted_total_amount_bill}")
+    st.markdown(small_note)
+# Page 3: WordCloud Obat
+elif page == "WordCloud Obat":
+    st.header("WordCloud Obat di Tiap Rumah Sakit")
+
+    # Filter by Treatment Place
+    selected_treatment_place = st.sidebar.selectbox(
+        "Filter by Treatment Place:",
+        options=["All"] + df['TreatmentPlace'].unique().tolist()
+    )
+
+    # Apply Filter
+    if selected_treatment_place != "All":
+        filtered_df = df[df['TreatmentPlace'] == selected_treatment_place]
+    else:
+        filtered_df = df
+
+    # Generate WordCloud
+    if not filtered_df.empty:
+        st.subheader(f"WordCloud for 'Nama Item Garda Medika' (Filtered by {selected_treatment_place})")
+        
+        # Create WordCloud
+        wordcloud_text = " ".join(filtered_df['Nama Item Garda Medika'])
+        wordcloud = WordCloud(width=800, height=400, background_color="white").generate(wordcloud_text)
+        
+        # Display WordCloud
+        fig, ax = plt.subplots(figsize=(10, 5))
+        ax.imshow(wordcloud, interpolation="bilinear")
+        ax.axis("off")
+        st.pyplot(fig)
+    else:
+        st.warning("No data available for the selected filter.")
+
+    # Display Total Records
+    st.text(f"Total Records: {len(filtered_df)}")
     st.markdown(small_note)
