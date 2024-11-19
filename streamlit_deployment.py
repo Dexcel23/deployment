@@ -22,7 +22,7 @@ df['Amount Bill'] = df['Amount Bill'].astype(float)
 st.title("Data Obat di Tiap Rumah Sakit")
 
 # Sidebar Navigation
-page = st.sidebar.selectbox("Choose Page:", ["Filter Data", "Grouped Data"])
+page = st.sidebar.selectbox("Choose Page:", ["Filter Data", "Grouped Data", "WordCloud Obat"])
 
 small_note = "Author: Dexcel Oswald Otniel"
 
