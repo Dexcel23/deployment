@@ -109,7 +109,7 @@ elif page == "WordCloud Obat":
         st.subheader(f"WordCloud for 'Nama Item Garda Medika' (Filtered by {selected_treatment_place})")
         
         # Create WordCloud
-        wordcloud_text = " ".join(filtered_df['Nama Item Garda Medika']).dropna())
+        wordcloud_text = " ".join(filtered_df['Nama Item Garda Medika']).dropna()
         wordcloud = WordCloud(width=800, height=400, background_color="white").generate(wordcloud_text)
         
         # Display WordCloud
