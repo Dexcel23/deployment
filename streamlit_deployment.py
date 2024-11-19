@@ -22,7 +22,7 @@ st.title("Data Obat di Tiap Rumah Sakit")
 # Sidebar Navigation
 page = st.sidebar.selectbox("Choose Page:", ["Filter Data", "Grouped Data"])
 
-small_note = "Dibuat oleh Dexcel Oswald Otniel"
+small_note = "Author: Dexcel Oswald Otniel"
 
 # Page 1: Filter Data
 if page == "Filter Data":
