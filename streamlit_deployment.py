@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from wordlcould import WordCloud
+from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
 # Membaca data dari file Excel
@@ -87,6 +87,7 @@ elif page == "Grouped Data":
 
     st.subheader(f"Total Amount Bill for all grouped data: {formatted_total_amount_bill}")
     st.markdown(small_note)
+    
 # Page 3: WordCloud Obat
 elif page == "WordCloud Obat":
     st.header("WordCloud Obat di Tiap Rumah Sakit")
