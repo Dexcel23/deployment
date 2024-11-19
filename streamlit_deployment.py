@@ -41,7 +41,7 @@ if page == "Filter Data":
         filtered_df = df
 
     # Pilih hanya kolom yang diinginkan
-    filtered_df = filtered_df[['Nama Item Garda Medika', 'Satuan', 'Qty', 'Amount Bill']]
+    filtered_df = filtered_df[['TreatmentPlace','Nama Item Garda Medika', 'Satuan', 'Qty', 'Amount Bill']]
 
     # Display Filtered Data
     st.subheader("Filtered Data Table")
